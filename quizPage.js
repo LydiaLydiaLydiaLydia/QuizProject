@@ -72,9 +72,10 @@ let changeColour = function(e) {
     for(let m = 0; m < answerPTags.length; m++){
         if(answerPTags[m] === e.target){
             e.target.style.backgroundColor = "#3c6036";
+            e.target.style.color = "#ebe3cf";
         }
         else{
-            console.log("heya");
+            answerPTags[m].style.color = "#1b2337";
             answerPTags[m].style.backgroundColor = "#ebe3cf";
         }
 

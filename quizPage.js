@@ -38,6 +38,11 @@ let alreadyPickedQuestions = [];
 for(let i = 0; i < arrayQuestions.length; i++){
     alreadyPickedQuestions.push(false);
 }
+//Array to keep track of answers chosen by user
+let userAnswers = [];
+let currentAnswer;
+let counter = 0;
+let progressDivs = document.getElementsByClassName("progressBar");
 
 //the funciton that randomly chooses the questions
 let chooseQuestions = function() {
@@ -52,6 +57,38 @@ let chooseQuestions = function() {
     }
 }
 
+//function that happens when next button is clicked
+let nextQuestion = function (){
+    //counter increases
+    counter ++;
+
+    //adding the selected answer to the userAnswers array
+    userAnswers.push(currentAnswer);
+    console.log(userAnswers);
+
+    //loading new question and answers
+    questionH2.innerHTML = chosenQuestions[counter].question;
+    for(let n = 0; n < answerPTags.length; n++){
+        answerPTags[n].innerHTML = chosenQuestions[counter].possibleAnswers[n];
+        //changing the background colour, might as well now i'm looping throught the p tags
+        answerPTags[n].style.backgroundColor = "#ebe3cf";
+        answerPTags[n].style.color = "#1b2337";
+    }
+
+    //change progress bar
+    progressDivs[0].getElementsByTagName("p")[0].innerHTML = `${counter + 1}/5`;
+    progressDivs[counter].style.backgroundColor = "#1b2337";
+
+
+    //deselect current answer (in variable)
+    currentAnswer = null;
+
+
+
+
+
+}
+
 
 //Calling the function that randomly chooses the questions when the document loads
 document.onload = chooseQuestions();
@@ -60,7 +97,8 @@ document.onload = chooseQuestions();
 //making the div where the mulitple choice answers will live a variable
 let questionArea = document.getElementById("possibleAnsDiv");
 //putting the question in the h2
-document.getElementById("questionH2").innerHTML = chosenQuestions[0].question;
+let questionH2 = document.getElementById("questionH2");
+questionH2.innerHTML = chosenQuestions[0].question;
 //putting the multiple choice answers into paragraphs and putting them in the div
 for(let k = 0; k < chosenQuestions[0].possibleAnswers.length; k ++){
     let answerPara = document.createElement("p");
@@ -68,11 +106,17 @@ for(let k = 0; k < chosenQuestions[0].possibleAnswers.length; k ++){
     questionArea.appendChild(answerPara);
 }
 
+//adding event listener to the Next button
+let nextButton = document.getElementsByTagName("button")[0];
+nextButton.addEventListener("click", nextQuestion, false);
+
+
 let changeColour = function(e) {
     for(let m = 0; m < answerPTags.length; m++){
         if(answerPTags[m] === e.target){
             e.target.style.backgroundColor = "#3c6036";
             e.target.style.color = "#ebe3cf";
+            currentAnswer = e.target.innerHTML;
         }
         else{
             answerPTags[m].style.color = "#1b2337";
@@ -82,7 +126,7 @@ let changeColour = function(e) {
     }
 }
 
-//making the answer you're hovering over stand out
+//getting the selected p-tag and making it change colour after selection
 let answerPTags = questionArea.getElementsByTagName("p");
 for(let l = 0; l < answerPTags.length; l ++){
     answerPTags[l].addEventListener("click", changeColour, false);

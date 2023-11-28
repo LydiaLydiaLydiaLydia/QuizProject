@@ -5,7 +5,6 @@ function startTimer(){
 }
 //function that happens after the countdown
 let goToQuiz = function(){
-    console.log("helllo");
     window.open(quizLink, "_self");
 }
 //getting the link to use it in my functions

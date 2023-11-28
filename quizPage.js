@@ -41,8 +41,10 @@ for(let i = 0; i < arrayQuestions.length; i++){
 //Array to keep track of answers chosen by user
 let userAnswers = [];
 let currentAnswer;
+//question counter
 let counter = 0;
 let progressDivs = document.getElementsByClassName("progressBar");
+
 
 //the funciton that randomly chooses the questions
 let chooseQuestions = function() {
@@ -61,37 +63,55 @@ let chooseQuestions = function() {
 let nextQuestion = function (){
     //counter increases
     counter ++;
+    //makig sure the button changes to 'submit'
+    if(counter === 4){
+        nextButton.innerHTML = "Sumbit";
+        nextButton.removeEventListener("click", nextQuestion, false);
+        nextButton.addEventListener("click", finishQuiz, false);
+    }
+    if(counter <= 4){
+        //adding the selected answer to the userAnswers array
+        userAnswers.push(currentAnswer);
+        console.log(userAnswers);
 
-    //adding the selected answer to the userAnswers array
-    userAnswers.push(currentAnswer);
-    console.log(userAnswers);
+        //loading new question and answers
+        questionH2.innerHTML = chosenQuestions[counter].question;
+        for(let n = 0; n < answerPTags.length; n++){
+            answerPTags[n].innerHTML = chosenQuestions[counter].possibleAnswers[n];
+            //changing the background colour, might as well now i'm looping throught the p tags
+            answerPTags[n].style.backgroundColor = "#ebe3cf";
+            answerPTags[n].style.color = "#1b2337";
+        }
 
-    //loading new question and answers
-    questionH2.innerHTML = chosenQuestions[counter].question;
-    for(let n = 0; n < answerPTags.length; n++){
-        answerPTags[n].innerHTML = chosenQuestions[counter].possibleAnswers[n];
-        //changing the background colour, might as well now i'm looping throught the p tags
-        answerPTags[n].style.backgroundColor = "#ebe3cf";
-        answerPTags[n].style.color = "#1b2337";
+        //change progress bar
+        progressDivs[0].getElementsByTagName("p")[0].innerHTML = `${counter + 1}/5`;
+        progressDivs[counter].style.backgroundColor = "#1b2337";
+
+
+        //deselect current answer (in variable)
+        currentAnswer = null;
     }
 
-    //change progress bar
-    progressDivs[0].getElementsByTagName("p")[0].innerHTML = `${counter + 1}/5`;
-    progressDivs[counter].style.backgroundColor = "#1b2337";
 
+}
 
-    //deselect current answer (in variable)
-    currentAnswer = null;
-
-
-
-
-
+//function to go to summary page
+let finishQuiz = function(){
+    nextButton.removeEventListener("click", finishQuiz, false);
+    window.open("summary.html", "", `width = ${summaryWidth}, height = ${summaryHeight}`);
+}
+let getHelp = function(){
+    helpBox.style.visibility = "visible";
+}
+let getHelpOff = function(){
+    helpBox.style.visibility = "hidden";
 }
 
 
 //Calling the function that randomly chooses the questions when the document loads
 document.onload = chooseQuestions();
+
+
 
 //For the first question:
 //making the div where the mulitple choice answers will live a variable
@@ -131,5 +151,15 @@ let answerPTags = questionArea.getElementsByTagName("p");
 for(let l = 0; l < answerPTags.length; l ++){
     answerPTags[l].addEventListener("click", changeColour, false);
 }
+
+//get the asterisk and p for help
+let helpMark = document.getElementsByTagName("span")[0];
+let helpBox = document.getElementById("qHelp");
+helpMark.addEventListener("mouseover", getHelp, false);
+helpMark.addEventListener("mouseout", getHelpOff, false);
+
+//getting the width and height of the page to make the pop-up page smaller than that
+let summaryWidth = window.innerWidth / 2;
+let summaryHeight = window.innerHeight /2;
 
 

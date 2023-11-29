@@ -7,19 +7,19 @@ beige #ebe3cf
  */
 body {
     background-color: #ebe3cf;
-    padding: 10%;
+    padding: 1%;
     font-family: "Baskerville Old Face", "serif";
 }
 h1 {
     color: #1b2337;
-    font-size: 3rem;
+    font-size: 2.5rem;
 }
 h2{
-    font-size: 2rem;
+    font-size: 1.75rem;
 }
 p, a , button{
-    font-size: 1.5rem;
-    padding: 1rem;
+    font-size: 1.4rem;
+    padding: .75rem;
     border-radius: 12px;
 }
 button{

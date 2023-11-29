@@ -63,6 +63,10 @@ let chooseQuestions = function() {
 let nextQuestion = function (){
     //counter increases
     counter ++;
+    //adding the selected answer to the userAnswers array
+    userAnswers.push(currentAnswer);
+    console.log(userAnswers);
+
     //makig sure the button changes to 'submit'
     if(counter === 4){
         nextButton.innerHTML = "Sumbit";
@@ -70,9 +74,7 @@ let nextQuestion = function (){
         nextButton.addEventListener("click", finishQuiz, false);
     }
     if(counter <= 4){
-        //adding the selected answer to the userAnswers array
-        userAnswers.push(currentAnswer);
-        console.log(userAnswers);
+
 
         //loading new question and answers
         questionH2.innerHTML = chosenQuestions[counter].question;
@@ -98,7 +100,10 @@ let nextQuestion = function (){
 //function to go to summary page
 let finishQuiz = function(){
     nextButton.removeEventListener("click", finishQuiz, false);
-    window.open("summary.html", "", `width = ${summaryWidth}, height = ${summaryHeight}`);
+    console.log(questions);
+    console.log(userAnswers);
+    console.log(correctAns);
+    window.open("summary.html", "", `top = ${summaryPosVert}, left = ${summaryPosHoriz}, width = ${summaryWidth}, height = ${summaryHeight}`);
 }
 let getHelp = function(){
     helpBox.style.visibility = "visible";
@@ -161,5 +166,18 @@ helpMark.addEventListener("mouseout", getHelpOff, false);
 //getting the width and height of the page to make the pop-up page smaller than that
 let summaryWidth = window.innerWidth / 2;
 let summaryHeight = window.innerHeight /2;
+// to get it to look centered, i need to get the size of the popup and half it (summaryWidth/2) and
+//minus it from the halved screen width... so the centre of the popup is at the halfway point
+let summaryPosHoriz = (screen.width/2) - (summaryWidth/2);
+let summaryPosVert = (screen.height/2) - (summaryHeight/2);
+
+//Streamlining my arrays to put into local storage
+let questions = [];
+let correctAns = [];
+for(let i = 0; i < chosenQuestions.length; i ++){
+    questions[i] = chosenQuestions[i].question;
+    correctAns[i] = chosenQuestions[i].possibleAnswers[chosenQuestions[i].answer];
+}
+
 
 

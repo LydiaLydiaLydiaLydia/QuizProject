@@ -93,8 +93,6 @@ let nextQuestion = function (){
         //deselect current answer (in variable)
         currentAnswer = null;
     }
-
-
 }
 
 //function to go to summary page

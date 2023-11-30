@@ -1,3 +1,30 @@
-console.log(JSON.parse(localStorage.getItem("questions")));
-console.log(JSON.parse(localStorage.getItem("userAnswers")));
-console.log(JSON.parse(localStorage.getItem("correctAns")));
+let questionsLS = JSON.parse(localStorage.getItem("questions"));
+let userAnswersLS = JSON.parse(localStorage.getItem("userAnswers"));
+let correctAnsLS = JSON.parse(localStorage.getItem("correctAns"));
+let mainDiv = document.getElementsByTagName("div")[0];
+let heading = document.getElementsByTagName("h1")[0];
+let correctCount = 0;
+console.log(questionsLS);
+console.log(userAnswersLS);
+console.log(correctAnsLS);
+for(let i = 0; i < questionsLS.length; i++){
+    //the question
+    let q = document.createElement("h2");
+    q.innerHTML = `Question ${i + 1}: ${questionsLS[i]}`;
+    mainDiv.appendChild(q);
+
+
+    //did they get it correct?
+    let correct = document.createElement("p");
+    correct.innerHTML = `You answered: ${userAnswersLS[i]}.<br>`;
+    if(correctAnsLS[i] === userAnswersLS[i]){
+        correctCount ++;
+        correct.innerHTML += "You got it right!";
+    }
+    else{
+        correct.innerHTML += "You got it wrong!";
+        correct.innerHTML += `<br>The correct answer is ${correctAnsLS[i]}.`;
+    }
+    mainDiv.appendChild(correct);
+}
+heading.innerHTML += `: ${correctCount} out of ${questionsLS.length}`;

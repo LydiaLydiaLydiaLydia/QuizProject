@@ -4,9 +4,8 @@ let correctAnsLS = JSON.parse(localStorage.getItem("correctAns"));
 let mainDiv = document.getElementsByTagName("div")[0];
 let heading = document.getElementsByTagName("h1")[0];
 let correctCount = 0;
-console.log(questionsLS);
-console.log(userAnswersLS);
-console.log(correctAnsLS);
+
+
 for(let i = 0; i < questionsLS.length; i++){
     //the question
     let q = document.createElement("h2");
@@ -27,4 +26,8 @@ for(let i = 0; i < questionsLS.length; i++){
     }
     mainDiv.appendChild(correct);
 }
-heading.innerHTML += `: ${correctCount} out of ${questionsLS.length}`;
+let grade = percentageGrade(questionsLS.length, correctCount);
+heading.innerHTML += `: ${correctCount} out of ${questionsLS.length}<br>${grade}%`;
+function percentageGrade(numQuestions, numCorrect){
+    return (numCorrect/numQuestions) * 100;
+}

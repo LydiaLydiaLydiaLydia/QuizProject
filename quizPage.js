@@ -2,7 +2,7 @@ let arrayQuestions = [
     {   question: "In the ancient Humourous practice of medicine, the four Humours that control the human body are Black Bile, Phlegm, Yellow Bile, and what other?",
         possibleAnswers: ["Mucous", "Resin", "Soul", "Blood"],
         answer: 3},
-    {   question: "In what country was the Illuminatti established during the Enlightenment?",
+    {   question: "In what country was the Illuminati established during the Enlightenment?",
         possibleAnswers: ["England", "France", "The American Colonies", "Germany"],
         answer: 3},
     {   question: "Defenestration has been a form political protest popular in Prague throughout history. What does it mean?",
@@ -105,13 +105,15 @@ let nextQuestion = function (){
 
 //function to go to summary page
 let finishQuiz = function(){
+    if(currentAnswer == null){
+        window.alert("Please select an answer to continue.");
+        return;
+    }
     userAnswers.push(currentAnswer);
     questions[counter] = chosenQuestions[counter].question;
     correctAns[counter] = chosenQuestions[counter].possibleAnswers[chosenQuestions[counter].answer];
     nextButton.removeEventListener("click", finishQuiz, false);
-    console.log(questions);
-    console.log(userAnswers);
-    console.log(correctAns);
+
     //storing to local storage
     localStorage.setItem("questions", JSON.stringify(questions));
     localStorage.setItem("userAnswers", JSON.stringify(userAnswers));

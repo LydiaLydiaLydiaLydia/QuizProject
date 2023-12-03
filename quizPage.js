@@ -1,33 +1,33 @@
 let arrayQuestions = [
-    {   question: "What is it?",
-        possibleAnswers: ["An egg", "A childe", "The Man", "The System"],
+    {   question: "In the ancient Humourous practice of medicine, the four Humours that control the human body are Black Bile, Phlegm, Yellow Bile, and what other?",
+        possibleAnswers: ["Mucous", "Resin", "Soul", "Blood"],
         answer: 3},
-    {   question: "Have you ever seen the eiffel tower?",
-        possibleAnswers: ["Yes", "No", "Twice", "Thrice"],
+    {   question: "In what country was the Illuminatti established during the Enlightenment?",
+        possibleAnswers: ["England", "France", "The American Colonies", "Germany"],
         answer: 3},
-    {   question: "Who?",
-        possibleAnswers: ["yer mum", "the band Metallica", "Jason Statham", "Lydia Sheehan"],
+    {   question: "Defenestration has been a form political protest popular in Prague throughout history. What does it mean?",
+        possibleAnswers: ["Throwing someone out of a window", "Debating in the town square", "Hunger strike", "To take up arms"],
         answer: 0},
-    {   question: "What is the meaning of this?",
-        possibleAnswers: ["it's a pronoun", "it's a word", "it means nothing!!!", "nothing means anything"],
+    {   question: "In what decade of the 1900s was the American Federal Bureau of Investigation (FBI) formed?",
+        possibleAnswers: ["1910s", "1950s", "1920s", "1930s"],
        answer: 2},
-    {   question: "Can I borrow a feeling?",
-        possibleAnswers: ["Millhouse's dad", "Handbag", "Can of Monster", "Monster Mash"],
+    {   question: "What was the first book ever printed on a printing press?",
+        possibleAnswers: ["The Bible", "Shakespeare's Folio", "Plato's Dialogues", "The German Constitution"],
         answer: 0},
-    {   question: "Where would I like to be buried?",
-        possibleAnswers: ["Arlington", "At Sea", "Makeout Creek", "Kilgarvan"],
+    {   question: "First produced in 1487, what was the subject of the Malleus Maleficarum?",
+        possibleAnswers: ["Demonology", "Witchcraft", "Witch Hunting", "The Antichrist"],
         answer: 2},
-    {   question: "How do you respond to an insult?",
-        possibleAnswers: ["A slap", "Thank you", "A hug", "A moider"],
+    {   question: "How did Cleopatra die?",
+        possibleAnswers: ["Beheading", "Poisonous snake bite", "Drowning", "Fell off a chariot"],
         answer: 1},
-    {   question: "Where?",
-        possibleAnswers: ["Frankfurt-Hahn", "Witch-Land", "Killorglin", "Lara's Hosue"],
+    {   question: "In Ancient Greece, what was a vomitorium?",
+        possibleAnswers: ["A room where you would go to vomit", "An exit", "Their word for the toilet", "An art gallery"],
         answer: 1},
-    {   question: "Bologna?",
-        possibleAnswers: ["yes please", "spam", "baloney", "meat-product"],
+    {   question: "Upon exhuming their tombs, what did the British do with ancient Egyptian mummies?",
+        possibleAnswers: ["Ate the preserved remains for theorised health benefits", "Ground them up and used them as fertiliser", "All of these things", "Put them in the British Museum"],
         answer: 2},
-    {   question: "How many?",
-        possibleAnswers: ["A handfull (of dust)", "Valentine Browne", "Il diavolo", "7"],
+    {   question: "Where was the Statue of Liberty built?",
+        possibleAnswers: ["Ohio", "France", "The Grand Canyon", "England"],
         answer: 1}
 ];
 
@@ -61,6 +61,11 @@ let chooseQuestions = function() {
 
 //function that happens when next button is clicked
 let nextQuestion = function (){
+    //checking if they've selected an answer
+    if(currentAnswer == null){
+        window.alert("Please select an answer to continue.");
+        return;
+    }
     //adding the selected answer to the userAnswers array
     userAnswers.push(currentAnswer);
     questions[counter] = chosenQuestions[counter].question;

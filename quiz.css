@@ -55,21 +55,24 @@ button{
     border-bottom-right-radius: 12px;
     border-top-right-radius: 12px;
 }
-#questionAndHelp{
+#questionAndHelp, #h2AndHint {
     display: flex;
     justify-content: space-between;
     width: 100%;
 }
-#questionAndHelp > h2{
-    flex: 3;
+#questionAndHelp > h1, #h2AndHint > h2 {
+    //flex: 3;
 }
-#questionAndHelp > p{
-    flex: 1;
+#questionAndHelp > p, #hint{
+    //flex: 1;
     font-size: 1rem;
     background-color: rgba(255, 255, 255, 0.3);
     border-radius:  5px;
     visibility: hidden;
     border: solid #a6233b;
+}
+#possibleAnsDiv > p{
+    cursor: pointer;
 }
 
 
